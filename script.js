@@ -32,6 +32,53 @@ function writePassword(){
 
 }
 
+function getPasswordOptions() {
+  var length = parseInt(
+    prompt("How many characters would you like your password to have ?"),
+    10
+  );
+  if (length < 8) {
+    alert("Password length must be at least 8 characters");
+    return null; 
+  }
+  if (length > 128) {
+    alert("Password length must be less than 129 characters");
+    return null;
+  }
+  var hasSpecialCharacters = confirm(
+    "Click OK to confirm including special characters."
+  );
+
+  var hasNumbers = confirm(
+    "Click OK to confirm including numbers."
+  );
+
+  var hasLowerCase = confirm(
+    "Click OK to confirm including lowercase letters."
+  );
+  
+  var hasUpperCase = confirm(
+    "Click OK to confirm including upper case letters."
+  );
+
+  if (hasSpecialCharacters === false &&
+      hasNumbers === false &&
+      hasLowerCase === false &&
+      hasUpperCase === false 
+    ) { 
+      alert("Must select at least one character type");
+      return null
+  }
+
+  var passwordOptions = {
+    length: length,
+    hasSpecialCharacters: hasSpecialCharacters,
+    hasNumbers: hasNumbers,
+    hasLowerCase: hasLowerCase,
+    hasUpperCase: hasUpperCase,
+  };
+  return passwordOptions;
+}
 
 // Add event listener to generate button
  generateBtn.addEventListener("click", writePassword);
