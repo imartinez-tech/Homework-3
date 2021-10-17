@@ -80,5 +80,42 @@ function getPasswordOptions() {
   return passwordOptions;
 }
 
+function getRandom(arr) {
+  var randIndex = Math.floor(Math.random() * arr.length);
+  var randElement = arr[randIndex];
+  return randElement;
+}
+
+function generatePassoword() {
+  var options = getPasswordOptions(); 
+  var result = [];
+
+  var possibleCharacters = [];
+  var guaranteedCharacters = []; 
+  if (options.hasSpecialCharacters) {
+    possibleCharacters = possibleCharacters.concat(specialCharacters);
+    guaranteedCharacters.push(getRandom(specialCharacters));
+  }
+  if (options.hasNumbers) {
+    possibleCharacters = possibleCharacters.concat(numbers);
+    guaranteedCharacters.push(getRandom(numbers));
+  }
+  if (options.hasLowerCase) {
+    possibleCharacters = possibleCharacters.concat(lowerCase);
+    guaranteedCharacters.push(getRandom(lowerCase));
+    }
+  if (options.hasUpperCase) {
+      possibleCharacters = possibleCharacters.concat(upperCase);
+      guaranteedCharacters.push(getRandom(upperCase));
+    }
+    for (let index = 0; index < options.length; index++) {
+      var possibleCharacters = getRandom(possibleCharacters);
+      result.push(possibleCharacters);
+    }
+    for (let index = 0; index < guaranteedCharacters.length; index++) {
+      result[index] = guaranteedCharacters[index];
+      }
+      return result.join('');
+}
 // Add event listener to generate button
  generateBtn.addEventListener("click", writePassword);
